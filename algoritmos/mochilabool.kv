@@ -1,0 +1,117 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+<MyScreenManager>:
+	id:screen_manager
+	FirstScreen:
+		id:first_screen
+	SecondScreen:
+	ThirdScreen:
+
+<FirstScreen>:
+	name:'first'
+	BoxLayout:
+		orientation:'vertical'
+		padding:[20,20,20,20]
+		spacing:10
+
+		Label:
+			text:'Capacidade da mochila'
+			font_size:30
+		TextInput:
+			text:'0'
+			write_tab: False
+			font_size:30
+			multiline:False
+			id:my_cap
+
+		Button:
+			id:my_bt
+			text:'OK'
+			font_size:30
+			on_release:root.setaCap()
+		Button:
+			id:my_bt0
+			text:'Proximo'
+			font_size:30
+			on_release:app.root.current='second'
+
+
+<ThirdScreen>:
+	id:my_third
+	name:'third'
+	BoxLayout:
+		orientation:'vertical'
+		spacing:10
+		padding:10
+		Label:
+			pos_hint:{'left':.1}
+			id:my_imprime1
+			font_size:30
+			text:'Valores:'
+		Label:
+			id:my_imprime2
+			pos_hint:{'left':.1}
+			font_size:30
+			text:'Itens:'
+		Button:
+			id:my_bt4
+			size_hint:[1,0.2]
+			text:'Imprimir valores'
+			font_size:30
+			on_release: root.Imprime()
+		Button:
+			id:my_bt5
+			size_hint:[1,0.2]
+			text:'Imprimir elementos'
+			font_size:30
+			on_release: root.ImprimeElementos()
+		Button:
+			id:my_bt6
+			size_hint:[1,0.2]
+			text:'Inicio'
+			font_size:30
+			on_release:app.root.current='first'
+
+
+<SecondScreen>:
+	id:my_second
+	name:'second'
+	BoxLayout:
+		orientation:'vertical'
+		Label:
+			font_size:30
+			text:'Valor:'
+		TextInput:
+			id:my_val
+			write_tab: False
+			multiline:False
+			text:'0'
+
+		Label:
+			font_size:30
+			text:'Peso:'
+		TextInput:
+			id:my_peso
+			write_tab: False
+			multiline:False
+			text:'0'
+		Button:
+			id:my_bt1
+			text:'Insere'
+			font_size:30
+			on_release:root.insere()
+		Button:
+			id:my_bt2
+			text:'Resolve'
+			font_size:30
+			on_release:root.resolveMochila()
+
+		AnchorLayout:
+			anchor_x:'center'
+			anchor_y:'bottom'
+			Button:
+				id:my_bt3
+				size_hint:[1,1]
+				text:'Proximo'
+				font_size:30
+				on_release: app.root.current = 'third'
+
