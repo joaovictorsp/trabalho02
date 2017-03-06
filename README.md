@@ -1,6 +1,4 @@
 # trabalho02
-
-<b>Para executar os programas, abra o terminal na pasta e digite:</b><br />
 <p>Download Python 2.7 Windows: </p><br />
 
 <b> https://www.python.org/download/releases/2.7/ </b><br />
