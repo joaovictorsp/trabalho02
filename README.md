@@ -1,12 +1,11 @@
 # trabalho02
 <p>Download Python 2.7 Windows: </p><br />
-
 <b> https://www.python.org/download/releases/2.7/ </b><br />
 
 <p> Abrir o prompt de comando e adicionar o Python nas variáveis do sistema: </p><br />
 <b>   PATH=PATH;c:\python27;c:\python27\script </b><br />
 
-<p>Instalar o Kivy (Instruções no site oficial se preferir: https://kivy.org/docs/installation/installation-windows.html ) </p><br />
+<p>Instalar o Kivy (Instruções no site oficial se preferir: https://kivy.org/docs/installation/installation-windows.html ) Insira esses comandos no prompt de comando </p><br />
 <b>   python -m pip install --upgrade pip wheel setuptools </b><br />
 
 <b>   python -m pip install kivy </b><br />
