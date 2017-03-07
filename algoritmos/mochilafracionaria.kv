@@ -4,6 +4,7 @@
 	FirstScreen:
 		id:first_screen
 	SecondScreen:
+	ThirdScreen:
 
 <FirstScreen>:
 	name:'first'
@@ -74,13 +75,18 @@
 			Button:
 				id:my_bt3
 				size_hint:[1,1]
-				text:'Proximo'
+				text:'Imprime'
 				font_size:50
 				on_release: app.root.current = 'third'
+		Button:
+			text:'Anterior'
+			font_size:50
+			on_release:app.root.current='first'
 
 
 <ThirdScreen>:
 	name:'third'
+	on_enter:root.Imprime()
 	BoxLayout:
 		orientation: 'vertical'
 		spacing:10
@@ -90,8 +96,8 @@
 			id:my_imprime
 			font_size:50
 			text:''
-
 		Button:
-			text:'Imprime'
+			text:'Inicio'
+			size_hint: (1, 0.15)
 			font_size:50
-			on_release:root.Imprime()
+			on_release: app.root.current='first'
