@@ -81,8 +81,10 @@ class SecondScreen(Screen):
 				if j > 0:
 					if p[j] == c[i] and v[j] >= resultado[j-1][i]:
 						resultado[j][i] = v[j];
-					elif p[j] < c[i] and (v[j] + resultado[j-1][c[i]-p[j]]) > resultado[j-1][i]:
-						resultado[j][i] = v[j] + resultado[j-1][c[i] - p[j]]
+					#elif p[j] < c[i] and (v[j] + resultado[j-1][c[i]-p[j]]) > resultado[j-1][i]:
+						#resultado[j][i] = v[j] + resultado[j-1][c[i] - p[j]]
+					elif p[j] < c[i]:
+						resultado[j][i] = max(v[j] + resultado[j-1][c[i]-p[j]],resultado[j-1][i])
 					else:
 						resultado[j][i] = resultado[j-1][i] 
 
