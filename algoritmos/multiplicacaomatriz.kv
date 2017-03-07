@@ -1,0 +1,55 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+<MyScreenManager>:
+	id:screen_manager
+	FirstScreen:
+		id:first_screen
+	SecondScreen:
+
+<FirstScreen>:
+	name:'first'
+	BoxLayout:
+		orientation:'vertical'
+		padding:20
+		spacing:10
+
+		Label:
+			text:'Número de linhas:'
+			font_size:60
+		TextInput:
+			text:'0'
+			font_size:60
+			id:my_linhas
+			write_tab:False
+			multiline:False
+		Label:
+			text:'Número de colunas:'
+			font_size:60
+		TextInput:
+			text:'0'
+			font_size:60
+			id:my_colunas
+			write_tab:False
+			multiline:False
+		Button:
+			text:'OK'
+			font_size:60
+			on_release:root.setaMatriz()
+		Button:
+			text:'Calcula Matriz'
+			font_size:60
+			on_release:root.calcula()
+		Button:
+			text:'Imprime'
+			font_size:60
+			on_release:app.root.current='second'
+
+<SecondScreen>:
+	id:my_second
+	name:'second'
+	on_enter: root.imprime()
+	BoxLayout:
+		orientation:'vertical'
+		Label:
+			id:my_imprime1
+			text:''
+			font_size:60
