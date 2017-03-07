@@ -1,0 +1,53 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+<MyScreenManager>:
+	id:screen_names
+	FirstScreen:
+	SecondScreen:
+
+<FirstScreen>:
+	name:'first'
+	BoxLayout:
+		orientation:'vertical'
+		padding:20
+		spacing:10
+
+		Label:
+	        text:'Insira o texto abaixo:'
+	        font_size:50
+	    TextInput:
+	    	text:''
+	    	font_size:30
+	    	#multiline:false
+	    	id:my_txt
+
+	    Button:
+	    	id:my_bt1
+	    	text:'OK'
+	    	font_size:50
+	    	on_release:root.auxEncode()
+	    Button:
+	    	id:my_bt2
+	    	text:'Proximo'
+	    	font_size:50
+	    	on_release:app.root.current='second'
+
+<SecondScreen>:
+	name:'second'
+	on_enter: root.imprime()
+	ScrollView:
+		#size:self.size
+		GridLayout:
+			cols:3
+			Label:
+				text:''
+				id:my_imprime2
+				font_size:50
+
+
+ 
+
+		
+
+
+
+	    
