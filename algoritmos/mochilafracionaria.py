@@ -15,33 +15,51 @@ from kivy.uix.screenmanager import ScreenManager,Screen,FadeTransition
 from operator import attrgetter
 import time
 
-itens = []
-peso = []
-valor = []
-capacidade = 0
-qtd = 0
-tam = 0
+itens2 = [] #vetor com as partes usadas dos itens
+peso = [] #vetor de pesos dos itens
+valor = [] #vetor de valores dos itens
+capacidade = 0 #capacidade da mochila
+qtd = 0 # Quantidade de elementos
+tam = 0 #tamanho do vetor
+#itCont = 0 #contador de itens para armazenar a posição
 
 class Item:
-	def __init__(self,valor,peso,valioso):
+	def __init__(self,valor,peso,valorAbsoluto,itCont):
 		self.valor = valor
 		self.peso = peso
-		self.valioso = valioso
+		self.valorAbsoluto = valorAbsoluto
+		self.itCont = itCont
 
-it = Item(0,0,0)
+itens = []
+
+def ordenaItens(valor,peso,valorAbsoluto):
+	for j in range(o,len(valorAbsoluto)):
+		for i in range(0,len(valorAbsoluto) - 1):
+			if valorAbsoluto[i] > valorAbsoluto[i+1]:
+				aux = valorAbsoluto[i+1]
+				valorAbsoluto[i+1] = valorAbsoluto[i]
+				valorAbsoluto[i] = aux #valorAbsoluto = valor/peso
+				#Ordenar os vetores de acordo com o maior valor absoluto valor/peso
+
+	return valorAbsoluto
+			
 
 def mochilaFracionaria(peso,valor,qtd,capacidade):
 	global itens
-
+	aux = 0.0
+	#vet = [0 for x in range(100)]
+	vet = []
 	indice = 0
-	j = qtd
+	j = qtd-1
 
-	while j >= 1:
+	while j >= 0:
 		if peso[j] <= capacidade:	
-			vet[j] = 1
+			vet.append(1)
 			capacidade = capacidade - peso[j]
 		else:
-			vet[j] = capacidade/peso[j]
+			aux = float(capacidade)/float(peso[j])
+			aux = format(aux,'.2f')
+			vet.append(float(aux))
 			capacidade = 0
 		j -= 1
 
@@ -60,19 +78,17 @@ class SecondScreen(Screen):
 		global itens
 		global qtd
 		global it
-		i = 1
 
 		valor = int(self.ids.my_val.text)
 		peso = int(self.ids.my_peso.text)
-		valioso = float(valor/peso)
+		valorAbsoluto = float(valor/peso)
 		qtd += 1
-
-		it[i] = Item(valor,peso,valioso)
-		i += 1
+		
+		itens.append(Item(valor,peso,valorAbsoluto,qtd))
 
 		#it.valor.append(valor)
 		#it.peso.append(peso)
-		#it.valioso.append(float(valor/peso))
+		#it.valorAbsoluto.append(float(valor/peso))
 		
 		self.ids.my_val.text = '0'
 		self.ids.my_peso.text = '0'
@@ -80,29 +96,46 @@ class SecondScreen(Screen):
 	def Resolve(self,*args):
 		global it
 		global itens
+		global itens2
 		global capacidade
 		global qtd
 
-		it.sort(key=attrgetter("valioso"))	
-		itens = mochilaFracionaria(it.peso,it.valor,qtd,capacidade)
+		itens.sort(key=attrgetter("valorAbsoluto"))	
+		peso = []
+		valor = []
+		#for i in range(len(itens)):
+		#	peso.append(itens[i].peso)
+		#	valor.append(itens[i].valor)
+
+		for elem in itens:
+			peso.append(elem.peso)
+			valor.append(elem.valor)
+
+		itens2 = mochilaFracionaria(peso,valor,qtd,capacidade)
 
 class ThirdScreen(Screen):
 	def Imprime(self,*args):
 		global capacidade
 		global it
-		global capacidade
+		global capacidaded
 		global qtd
 		global itens
+		global itens2
 
 		label = self.ids.my_imprime
 		i = 0 
 
-		i = qtd
-		while i >= 1:
-			label.text += ''+itens[j]
-			i -= 1
-
-		 
+		#i = qtd
+		#while i >= 1:
+		#	label.text += ' '+str(itens2[i])+' '
+		#	i -= 1
+		#for i in range(len(itens2)):
+		#	label.text += ' '+str(itens2[i])+' '
+		label.text = ''
+		i = qtd - 1
+		for elem in itens2:
+			label.text += ' '+str(elem)+' do item %d'%(itens[i].itCont)+'\n'
+		 	i -= 1
 
 class MyScreenManager(ScreenManager):
 	pass
